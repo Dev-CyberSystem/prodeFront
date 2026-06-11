@@ -58,7 +58,7 @@ export default function Register() {
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="Juan Román Riquelme"
+              placeholder="Lionel Messi"
               required
             />
           </div>
