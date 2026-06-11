@@ -262,6 +262,9 @@ export default function Admin() {
                       <span>{m.awayTeam} {m.awayFlag}</span>
                     </div>
                     <span className="stage-tag">{m.stage}</span>
+                    <button className="btn-delete" onClick={() => handleDelete(m._id)}>
+                      Eliminar
+                    </button>
                   </div>
                 ))}
               </div>
