@@ -151,7 +151,7 @@ export default function Admin() {
     <div className="admin-page">
       <div className="admin-hero">
         <h1 className="admin-title">⚙️ Panel de Admin</h1>
-        <p className="admin-subtitle">Gestión del Prode · Mundial 2026</p>
+        <p className="admin-subtitle">Gestión del Prode. · Mundial 2026</p>
       </div>
 
       <div className="admin-body">
@@ -325,7 +325,7 @@ export default function Admin() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border)' }}>
               <h2 style={{ margin: 0 }}>Usuarios registrados ({users.length})</h2>
               <button className="btn-sync" onClick={handleRecalcPoints} disabled={recalcing}>
-                {recalcing ? '⏳ Recalculando...' : '🔁 Recalcular puntos'}
+                {recalcing ? '⏳ Recalculando...' : '🔁 Recalcular puntos.'}
               </button>
             </div>
             {usersLoading ? (
