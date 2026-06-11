@@ -1,0 +1,99 @@
+.standings-wrap {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.standings-loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+
+.standings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.group-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.group-header {
+  background: rgba(116,172,223,0.1);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.group-letter {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: var(--celeste);
+}
+
+.group-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.group-table th {
+  padding: 0.35rem 0.4rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid var(--border);
+}
+
+.group-table td {
+  padding: 0.45rem 0.4rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.group-table tr:last-child td {
+  border-bottom: none;
+}
+
+.col-pos { width: 24px; color: var(--text-muted); }
+.col-team { text-align: left !important; min-width: 120px; }
+.col-pts { color: var(--white); font-size: 0.9rem; }
+
+.team-flag-sm { font-size: 1rem; margin-right: 5px; }
+.team-name-sm { font-weight: 500; }
+
+/* Classification zones */
+.qualify-1 { background: rgba(116,172,223,0.08); border-left: 2px solid var(--celeste); }
+.qualify-2 { background: rgba(116,172,223,0.04); border-left: 2px solid rgba(116,172,223,0.4); }
+.maybe-qualify { border-left: 2px solid rgba(246,180,14,0.3); }
+
+.pos-gd { color: var(--success); }
+.neg-gd { color: var(--error); }
+
+.empty-group {
+  padding: 1rem !important;
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.75rem;
+}
+
+.standings-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.standings-note strong { color: var(--celeste); }

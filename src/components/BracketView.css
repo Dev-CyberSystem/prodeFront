@@ -1,0 +1,199 @@
+.bracket-wrap {
+  padding: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bracket-loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+
+.bracket-stages {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.stage-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stage-btn:hover {
+  border-color: var(--celeste);
+  color: var(--celeste);
+}
+
+.stage-btn.active {
+  background: var(--celeste);
+  border-color: var(--celeste);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+.stage-btn.locked {
+  opacity: 0.5;
+}
+
+.stage-done {
+  font-size: 0.7rem;
+  background: rgba(34,197,94,0.2);
+  color: var(--success);
+  border-radius: 10px;
+  padding: 0 4px;
+}
+
+.bracket-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.bracket-phase-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: var(--celeste);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.bracket-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.grid-r32 { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.grid-r16 { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.grid-qf  { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.grid-small { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+/* Match box */
+.bracket-match {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.bracket-match:hover {
+  border-color: rgba(116,172,223,0.3);
+}
+
+.bracket-match.arg-match {
+  border-color: rgba(116,172,223,0.5);
+  background: rgba(116,172,223,0.05);
+  box-shadow: 0 0 12px rgba(116,172,223,0.1);
+}
+
+.bracket-date {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  padding: 0.3rem 0.6rem;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.bracket-team {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.15s;
+  min-height: 36px;
+}
+
+.bracket-team:last-child { border-bottom: none; }
+
+.bracket-team.winner {
+  background: rgba(246,180,14,0.08);
+}
+
+.bracket-team.tbd {
+  opacity: 0.45;
+}
+
+.bracket-team.arg-team {
+  background: rgba(116,172,223,0.1);
+}
+
+.b-flag { font-size: 1rem; flex-shrink: 0; }
+
+.b-name {
+  flex: 1;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bracket-team.winner .b-name { color: var(--gold); font-weight: 600; }
+
+.b-score {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  min-width: 20px;
+  text-align: right;
+}
+
+.bracket-team.winner .b-score { color: var(--gold); }
+
+/* Third place */
+.third-place-box {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.third-place-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3px;
+}
+
+/* Legend */
+.bracket-legend {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.leg-box {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.leg-box.arg  { background: rgba(116,172,223,0.3); border: 1px solid rgba(116,172,223,0.6); }
+.leg-box.win  { background: rgba(246,180,14,0.25); border: 1px solid rgba(246,180,14,0.5); }
+.leg-box.tbd-leg { background: rgba(255,255,255,0.05); border: 1px solid var(--border); opacity: 0.5; }
