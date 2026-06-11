@@ -22,6 +22,7 @@ export default function Admin() {
   const [users, setUsers] = useState([]);
   const [usersLoading, setUsersLoading] = useState(false);
   const [togglingRole, setTogglingRole] = useState(null);
+  const [recalcing, setRecalcing] = useState(false);
 
   const fetchMatches = useCallback(async () => {
     try {
@@ -49,6 +50,20 @@ export default function Admin() {
   }, []);
 
   useEffect(() => { if (tab === 'users') fetchUsers(); }, [tab, fetchUsers]);
+
+  const handleRecalcPoints = async () => {
+    if (!window.confirm('¿Recalcular los puntos de todos los usuarios desde las predicciones existentes?')) return;
+    setRecalcing(true);
+    try {
+      const { data } = await api.post('/users/recalc-points');
+      toast.success(data.message);
+      fetchUsers();
+    } catch (err) {
+      toast.error('Error al recalcular');
+    } finally {
+      setRecalcing(false);
+    }
+  };
 
   const handleToggleRole = async (userId, currentRole) => {
     const newRole = currentRole === 'admin' ? 'user' : 'admin';
@@ -307,7 +322,12 @@ export default function Admin() {
         )}
         {tab === 'users' && (
           <div className="admin-card">
-            <h2>Usuarios registrados ({users.length})</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border)' }}>
+              <h2 style={{ margin: 0 }}>Usuarios registrados ({users.length})</h2>
+              <button className="btn-sync" onClick={handleRecalcPoints} disabled={recalcing}>
+                {recalcing ? '⏳ Recalculando...' : '🔁 Recalcular puntos'}
+              </button>
+            </div>
             {usersLoading ? (
               <p className="loading-text">Cargando usuarios...</p>
             ) : users.length === 0 ? (
