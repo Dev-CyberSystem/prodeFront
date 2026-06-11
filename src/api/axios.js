@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const URI = "https://prodeback-wvvp.onrender.com/api"
+
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || '/api',
+  baseURL: URI || '/api',
 });
 
 api.interceptors.request.use((config) => {
