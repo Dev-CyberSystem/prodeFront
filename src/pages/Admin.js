@@ -19,6 +19,9 @@ export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [syncing, setSyncing] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [usersLoading, setUsersLoading] = useState(false);
+  const [togglingRole, setTogglingRole] = useState(null);
 
   const fetchMatches = useCallback(async () => {
     try {
@@ -32,6 +35,34 @@ export default function Admin() {
   }, []);
 
   useEffect(() => { fetchMatches(); }, [fetchMatches]);
+
+  const fetchUsers = useCallback(async () => {
+    setUsersLoading(true);
+    try {
+      const { data } = await api.get('/users');
+      setUsers(data);
+    } catch (err) {
+      toast.error('Error cargando usuarios');
+    } finally {
+      setUsersLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { if (tab === 'users') fetchUsers(); }, [tab, fetchUsers]);
+
+  const handleToggleRole = async (userId, currentRole) => {
+    const newRole = currentRole === 'admin' ? 'user' : 'admin';
+    setTogglingRole(userId);
+    try {
+      await api.patch(`/users/${userId}/role`, { role: newRole });
+      toast.success(`Rol actualizado a ${newRole}`);
+      fetchUsers();
+    } catch (err) {
+      toast.error('Error al cambiar rol');
+    } finally {
+      setTogglingRole(null);
+    }
+  };
 
   const handleAddMatch = async (e) => {
     e.preventDefault();
@@ -121,6 +152,9 @@ export default function Admin() {
           </button>
           <button className={`tab-btn ${tab === 'finished' ? 'active' : ''}`} onClick={() => setTab('finished')}>
             Finalizados ({finished.length})
+          </button>
+          <button className={`tab-btn ${tab === 'users' ? 'active' : ''}`} onClick={() => setTab('users')}>
+            Usuarios
           </button>
         </div>
 
@@ -267,6 +301,54 @@ export default function Admin() {
                     </button>
                   </div>
                 ))}
+              </div>
+            )}
+          </div>
+        )}
+        {tab === 'users' && (
+          <div className="admin-card">
+            <h2>Usuarios registrados ({users.length})</h2>
+            {usersLoading ? (
+              <p className="loading-text">Cargando usuarios...</p>
+            ) : users.length === 0 ? (
+              <p className="empty-text">No hay usuarios registrados.</p>
+            ) : (
+              <div className="users-table-wrap">
+                <table className="users-table">
+                  <thead>
+                    <tr>
+                      <th>Usuario</th>
+                      <th>Email</th>
+                      <th>Registro</th>
+                      <th>Predicciones</th>
+                      <th>Puntos</th>
+                      <th>Rol</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((u) => (
+                      <tr key={u._id} className={u.role === 'admin' ? 'user-row admin-row' : 'user-row'}>
+                        <td className="user-name-cell">
+                          <span className="user-avatar">{u.name.charAt(0).toUpperCase()}</span>
+                          {u.name}
+                        </td>
+                        <td className="user-email">{u.email}</td>
+                        <td className="user-date">{new Date(u.createdAt).toLocaleDateString('es-AR')}</td>
+                        <td className="user-num">{u.predictions}</td>
+                        <td className="user-pts">{u.points}</td>
+                        <td>
+                          <button
+                            className={`role-btn ${u.role === 'admin' ? 'role-admin' : 'role-user'}`}
+                            onClick={() => handleToggleRole(u._id, u.role)}
+                            disabled={togglingRole === u._id}
+                          >
+                            {u.role === 'admin' ? '⭐ Admin' : '👤 Usuario'}
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>
