@@ -106,7 +106,10 @@ export default function MatchCard({ match, prediction, onPredictionSaved }) {
                 min="0"
                 max="99"
                 value={home}
-                onChange={(e) => setHome(e.target.value)}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  if (v === '' || (/^\d{1,2}$/.test(v) && Number(v) >= 0)) setHome(v);
+                }}
                 placeholder="0"
               />
               <span>-</span>
@@ -115,7 +118,10 @@ export default function MatchCard({ match, prediction, onPredictionSaved }) {
                 min="0"
                 max="99"
                 value={away}
-                onChange={(e) => setAway(e.target.value)}
+                onChange={(e) => {
+                  const v = e.target.value;
+                  if (v === '' || (/^\d{1,2}$/.test(v) && Number(v) >= 0)) setAway(v);
+                }}
                 placeholder="0"
               />
             </div>
